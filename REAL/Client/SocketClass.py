@@ -1,5 +1,5 @@
 import socket
-import ControlClass
+import ControlMainClass
 import threading
 
 class SocketClass(threading.Thread):
@@ -17,7 +17,7 @@ class SocketClass(threading.Thread):
         pass
 
     def run(self):
-        ControlClass.ControlClass()
+        ControlMainClass.ControlMainClass()
         pass
 
     def socketConnect(self):
