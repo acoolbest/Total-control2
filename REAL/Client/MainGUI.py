@@ -14,8 +14,12 @@ class MainGUI():
         self.disconnectButton.grid(row=0,column=1)
         self.settingButton.grid(row=0,column=2)
         self.connectButton.bind('<Button-1>', self.connectButtonCallback)
+        self.disconnectButton.bind('<Button-1>',self.disconnectButtonCallback)
         self.settingButton.bind('<Button-1>', self.settingButtonCallback)
         self.autoWindowSize()
+
+        self.sock=SocketClass.SocketClass()
+
         self.app.mainloop()
         pass
 
@@ -23,7 +27,6 @@ class MainGUI():
         pass
 
     def connectButtonCallback(self,event):
-        self.sock=SocketClass.SocketClass()
         self.sock.socketConnect()
         self.sock.start()
 
@@ -40,5 +43,4 @@ class MainGUI():
         self.connectButton.config(width=buttonWidth)
         self.disconnectButton.config(width=buttonWidth)
         self.settingButton.config(width=buttonWidth)
-
         pass
