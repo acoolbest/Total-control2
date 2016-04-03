@@ -42,12 +42,9 @@ class SettingGUI(Toplevel):
         file.close()
 
     def loadSetting(self):
-
-
         file=open('setting.set','rt')
         import os
         if os.path.getsize('setting.set'):
-
             self.ipEntryString.set(file.readline().strip())
             self.portEntryString.set(file.readline().strip())
             self.startupCheckFlag.set(int(file.readline()))
