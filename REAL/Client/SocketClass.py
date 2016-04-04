@@ -16,8 +16,8 @@ class SocketClass(threading.Thread):
         pass
 
     def run(self):
+        self.socketConnect()
         controller=ControlMainClass.ControlMainClass()
-
         while True:
             try:
                 controller.command(self.sock.recv(1024))

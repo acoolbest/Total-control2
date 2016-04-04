@@ -27,7 +27,6 @@ class MainGUI():
         pass
 
     def connectButtonCallback(self,event):
-        self.sock.socketConnect()
         self.sock.start()
 
     def disconnectButtonCallback(self,event):
