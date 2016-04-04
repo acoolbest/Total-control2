@@ -1,6 +1,6 @@
 from pykeyboard import PyKeyboard
 
-class KeyboardControl():
+class WinKeyboardControl():
     
     keyboardObject=''
     def __init__(self):
@@ -73,5 +73,5 @@ class KeyboardControl():
 
 
 if __name__=="__main__":
-    keyboard=KeyboardControl()
+    keyboard=WinKeyboardControl()
     keyboard.keyClick('a')

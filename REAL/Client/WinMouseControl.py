@@ -1,6 +1,6 @@
 from pymouse import PyMouse
 
-class MouseControl():
+class WinMouseControl():
     
     mouseObject=''
     def __init__(self):
@@ -11,7 +11,7 @@ class MouseControl():
     def __del__(self):
         pass
     
-    def mouseMove(self,x,y,button):
+    def mouseMove(self,x,y,button=None):
         self.mouseObject.move(x, y)
         return 0
     
@@ -20,14 +20,14 @@ class MouseControl():
         return 0
     
     def mousePress(self,x,y,button):
-        self.mouseObject.press(x, y, button)
+        self.mouseObject.press(x, y, button)   #button:1 left, button2: middle button3:right
         return 0
     
     def mouseRelease(self,x,y,button):
-        self.mouseObject.release(x, y, button)
+        self.mouseObject.release(x, y, button)   #button:1 left, button2: middle button3:right
         return 0
     
 if __name__=="__main__":
-    mouse=MouseControl()
+    mouse=WinMouseControl()
     mouse.mouseMove(300,100,1)
     pass

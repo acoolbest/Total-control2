@@ -16,7 +16,13 @@ class SocketClass(threading.Thread):
         pass
 
     def run(self):
-        ControlMainClass.ControlMainClass()
+        controller=ControlMainClass.ControlMainClass()
+
+        while True:
+            try:
+                controller.command(self.sock.recv(1024))
+            except socket.error as m:
+                print m
         pass
 
     def socketConnect(self):
