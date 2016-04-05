@@ -14,15 +14,25 @@ public class SendSocketClass implements Runnable {
 
     final static String ERROR_TEG="SendSocketClass";
     private DataOutputStream dataOutputStream;
+    private byte[] buffer;
+    private Thread thread;
 
     public SendSocketClass(Socket socket)
     {
+        thread=new Thread(this);
         try {
             dataOutputStream=new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
-            Log.i(ERROR_TEG,"getOutputStream() 에러");
+            Log.i(ERROR_TEG, "getOutputStream() 에러");
         }
+    }
+
+    public int send(byte[] buffer)
+    {
+        this.buffer=buffer;
+        thread.start();
+        return 0;
     }
 
 
@@ -31,7 +41,31 @@ public class SendSocketClass implements Runnable {
 
         while(true)
         {
-
+            waitThread();
+            try {
+                dataOutputStream.write(buffer,0,1024);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public synchronized void waitThread()
+    {
+        try {
+            thread.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void notifyThread()
+    {
+        thread.notify();
+    }
+
+    public void threadStart()
+    {
+        thread.start();
     }
 }
