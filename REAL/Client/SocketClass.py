@@ -6,6 +6,7 @@ class SocketClass(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)
+        self.controller=ControlMainClass.ControlMainClass()
         self.sock=None
 
 
@@ -13,14 +14,16 @@ class SocketClass(threading.Thread):
         if self.sock!=None:
             self.sock.close()
             self.sock=None
+
         pass
 
     def run(self):
         self.socketConnect()
-        controller=ControlMainClass.ControlMainClass()
         while True:
             try:
-                controller.command(self.sock.recv(1024))
+                recvData=self.sock.recv(1024)
+                print recvData
+                self.controller.command(recvData)
             except socket.error as m:
                 print m
         pass
@@ -41,6 +44,8 @@ class SocketClass(threading.Thread):
         print self.addr
         self.sock.connect(tuple(self.addr))
 
+        self.sock.send(str(self.pcInfoGen()))
+
         print "socket connect end"
 
     def socketDisconnect(self):
@@ -54,6 +59,14 @@ class SocketClass(threading.Thread):
         print "socket disconnect end"
         pass
 
+    def pcInfoGen(self):
+        pcInfo=[]
+        if self.controller.osName=='Windows':
+            pcInfo.append(0)
+        pcInfo.append(self.controller.pcName)
+        pcInfo.append(self.controller.screenSize)
+        print "pcInfo",pcInfo
+        return pcInfo
 
 if __name__=="__main__":
     SocketClass().start()

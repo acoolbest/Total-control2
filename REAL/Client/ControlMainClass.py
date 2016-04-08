@@ -19,6 +19,7 @@ class ControlMainClass():
     def __init__(self):
         self.osName=platform.system()
         self.pcName=os.environ['computername']
+        self.screenSize=pyautogui.size()
         print "Operation system is: ",self.osName
         print "PC name is: ",self.pcName
 
@@ -29,29 +30,30 @@ class ControlMainClass():
         pass
 
     def command(self,data):
-        if chr(data[0])=='m':
-            if chr(data[1])=='p':
-                self.controller.mouseDown(data[2],data[3],self.mouseMap[data[4]]) # x,y,b
+        if data[0]=='m':
+            x=(ord(data[3])*100)+ord(data[4])
+            y=(ord(data[5])*100)+ord(data[6])
+
+            self.controller.moveTo( x, y) # x,y
+            if data[1]=='p':
+                self.controller.mouseDown(x,y,self.mouseMap[ord(data[2])]) # x,y,b
                 pass
-            elif chr(data[1])=='m':
-                self.controller.moveTo( (data[2]*100)+data[3], (data[4]*100)+data[5]) # x,y
+            else:
+                self.controller.mouseUp(x,y,self.mouseMap[ord(data[4])]) # x,y,b
                 pass
-            elif chr(data[1])=='s':
-                if chr(data[2])=='u':
+            if data[7]=='s':
+                if data[8]=='u':
                     self.controller.scroll(10)
                     pass
                 else:
                     self.controller.scroll(-10)
                     pass
                 pass
-            else:
-                self.controller.mouseUp(data[2],data[3],self.mouseMap[data[4]]) # x,y,b
-                pass
         else:
-            if chr(data[1])=='p':
-                self.controller.keyDown(self.controller.KEYBOARD_KEYS[data[2]])
+            if data[1]=='p':
+                self.controller.keyDown(self.controller.KEYBOARD_KEYS[ord(data[2])])
                 pass
             else:
-                self.controller.keyUp(data[2])
+                self.controller.keyUp(self.controller.KEYBOARD_KEYS[ord(data[2])])
                 pass
         pass
