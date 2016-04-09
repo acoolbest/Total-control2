@@ -20,6 +20,8 @@ public class SendSocketClass extends Thread {
     final static private int STOP_FLAG=0;
     final static private int START_FLAG=1;
     final static private int WAIT_FLAG=2;
+
+    final static private int sendBufferSize=9;
     private int threadFlag=START_FLAG;
     private DataOutputStream dataOutputStream;
     private byte[] buffer;
@@ -69,7 +71,7 @@ public class SendSocketClass extends Thread {
         {
             waitThread();
             try {
-            	dataOutputStream.write(buffer,0,1024);
+            	dataOutputStream.write(buffer,0,9);
             }catch(SocketException e){
             	e.printStackTrace();
             	break;

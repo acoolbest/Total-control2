@@ -21,8 +21,8 @@ class SocketClass(threading.Thread):
         self.socketConnect()
         while True:
             try:
-                recvData=self.sock.recv(1024)
-                print recvData
+                recvData=self.sock.recv(9)
+                #print recvData
                 self.controller.command(recvData)
             except socket.error as m:
                 print m

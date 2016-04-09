@@ -363,23 +363,22 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
     @Override
     public boolean onGenericMotion(View v, MotionEvent event) {
 
-        byte [] buffer= new byte[1024];
+        byte [] buffer= new byte[9];
         buffer[0]='m';
         buffer[1]='r';
+        buffer[2]=1;
         switch(event.getButtonState())
         {
             case MotionEvent.BUTTON_PRIMARY:
-                Log.i("mouse left:","left");
                 buffer[1]='p';
                 buffer[2]=1;
                 break;
             case MotionEvent.BUTTON_TERTIARY:
-                Log.i("mouse middle:", "middle");
                 buffer[1]='p';
                 buffer[2]=2;
                 break;
             case MotionEvent.BUTTON_SECONDARY:
-                Log.i("mouse right:", "right");
+
                 buffer[1]='p';
                 buffer[2]=3;
                 break;
@@ -389,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
         {
 
             case MotionEvent.ACTION_SCROLL:
-                Log.i("mouse scroll:", "scroll" + event.getAxisValue(MotionEvent.AXIS_VSCROLL));
+
                 buffer[7]='s';
                 if(event.getAxisValue(MotionEvent.AXIS_VSCROLL)>0)
                 {
@@ -409,8 +408,12 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
         buffer[5]=(byte)(y/100);
         buffer[6]=(byte)(y%100);
 
-        //server.send(buffer);
+        Log.i("mouse",String.valueOf(buffer[0])+" "+String.valueOf(buffer[1])+" "+String.valueOf(buffer[2])+" "+String.valueOf(buffer[3])+" "+String.valueOf(buffer[4])+" "+String.valueOf(buffer[5])+" "+String.valueOf(buffer[6])+" "+String.valueOf(buffer[7])+" "+String.valueOf(buffer[8]));
+
+
+        server.send(buffer);
         view.setFocusable(true);
+
 
         return true;
     }
@@ -418,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        byte[] buffer=new byte[1024];
+        byte[] buffer=new byte[9];
         buffer[0]='k';
 
 

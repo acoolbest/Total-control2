@@ -29,5 +29,7 @@ class WinMouseControl():
     
 if __name__=="__main__":
     mouse=WinMouseControl()
-    mouse.mouseMove(300,100,1)
+    mouse.mouseMove(10,10,1)
+    mouse.mousePress(10,10,1)
+    mouse.mouseRelease(10,10,1)
     pass
