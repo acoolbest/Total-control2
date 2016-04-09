@@ -124,7 +124,11 @@ class ControlMainClass():
         self.keyboardMap[123] = self.pyKeyboard.function_keys[7]
         self.keyboardMap[124] = self.pyKeyboard.function_keys[8]
         self.keyboardMap[125] = self.pyKeyboard.function_keys[9]
-        self.keyboardMap[129] = self.pyKeyboard.hangul_key
+	if self.osName=="Windows":
+	    self.keyboardMap[129] = self.pyKeyboard.hangul_key
+	elif self.osName=="Linux":
+	    self.keyboardMap[129] = -1
+	    pass
         self.keyboardMap[132] = self.pyKeyboard.home_key
         self.keyboardMap[141] = self.pyKeyboard.left_key
         self.keyboardMap[146] = '0'
@@ -183,14 +187,18 @@ class ControlMainClass():
                     pass
             pass
         else:
-            print data[1], ord(data[2])
-            if data[1]=='p' and ord(data[2])!=0:
+	    print 'data: ',data[0],' '+data[1],' ',ord(data[2])
+	    keyCode=ord(data[2])
+            if data[1]=='p' and keyCode!=0:
                 #self.controller.keyDown(self.controller.KEYBOARD_KEYS[ord(data[2])])
-                print ord(data[2])
-                self.pyKeyboard.press_key(self.keyboardMap[ord(data[2])])
+                print 'press '+str(ord(data[2]))
+		if self.keyboardMap[ord(data[2])]!=-1:
+	            self.pyKeyboard.press_key(self.keyboardMap[ord(data[2])])
                 pass
-            elif data[1]=='r' and ord(data[2])!=0:
+            elif data[1]=='r' and keyCode!=0:
                 #self.controller.keyUp(self.controller.KEYBOARD_KEYS[ord(data[2])])
-                self.pyKeyboard.release_key(self.keyboardMap[ord(data[2])])
+	    	print 'release '+str(ord(data[2]))
+		if self.keyboardMap[ord(data[2])]!=-1:
+                    self.pyKeyboard.release_key(self.keyboardMap[ord(data[2])])
                 pass
         pass

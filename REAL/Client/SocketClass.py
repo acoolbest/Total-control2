@@ -63,6 +63,8 @@ class SocketClass(threading.Thread):
         pcInfo=[]
         if self.controller.osName=='Windows':
             pcInfo.append(0)
+	elif self.controller.osName=='Linux':
+	    pcInfo.append(1)
         pcInfo.append(self.controller.pcName)
         pcInfo.append(self.controller.screenSize)
         print "pcInfo",pcInfo
