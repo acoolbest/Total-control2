@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
         keyMap.put(123,97);  //end
         keyMap.put(124,133);   //insert
 
-        keyMap.put(131,76);   //f1
+        keyMap.put(131,102);   //f1
         keyMap.put(132,113);   //f2
         keyMap.put(133,119);   //f3
         keyMap.put(134,120);   //f4
@@ -378,7 +378,6 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
                 buffer[2]=2;
                 break;
             case MotionEvent.BUTTON_SECONDARY:
-
                 buffer[1]='p';
                 buffer[2]=3;
                 break;
@@ -432,7 +431,7 @@ public class MainActivity extends AppCompatActivity implements View.OnGenericMot
                 buffer[2] = keyMap.get(keyCode).byteValue();
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
                 Log.i("keyboard up", "getUnicodeChar(ascii) :" + keyMap.get(keyCode));
-                buffer[1] = 'u';
+                buffer[1] = 'r';
                 buffer[2] = keyMap.get(keyCode).byteValue();
             }
         }

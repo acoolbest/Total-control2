@@ -10,7 +10,7 @@ class WinKeyboardControl():
     
     def __del__(self):
         pass
-    
+
     def keyClick(self,ch):
         if ch!='caps_lock':
             self.keyboardObject.tap_key(ch)
@@ -74,4 +74,6 @@ class WinKeyboardControl():
 
 if __name__=="__main__":
     keyboard=WinKeyboardControl()
-    keyboard.keyClick('a')
+    print keyboard.keyboardObject.function_keys
+    keyboard.keyboardObject.press_key(keyboard.keyboardObject.function_keys[1])
+    keyboard.keyboardObject.release_key(keyboard.keyboardObject.function_keys[1])
